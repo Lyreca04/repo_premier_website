@@ -1,0 +1,211 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /*  pour que sur la ligne x on ai pas de scroll horizontal */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  background: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: calc(0.3rem + 1vw);
+  position: relative;
+  /* position: fixed;
+  width: 100%;     ne pas oublier pour pas que la nav bouge */
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+}
+
+.navbar li {
+  list-style: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar a,
+h3 {
+  text-decoration: none;
+  color: white;
+  font-family: "Poppins";
+}
+
+.navbar ul :hover {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.1);
+}
+
+#icons {
+  display: flex;
+  gap: 40px;
+}
+#icons img {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+#icons img:hover {
+  transform: scale(1.2); /* effet grossissant au hover  */
+}
+
+#hamburger {
+  display: none;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.video-container {
+  position: relative;
+  width: 100%; /* pas vw car pour le responsive , il y a des navigateurs qui incluent des barres de défilement */
+  height: 100vh;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.textshop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* centre exact */
+  text-align: center;
+  color: #e6e6e6;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out; /* ca sert a faire une transition douce , si je le met pas ici, ca va etre brutal */
+}
+.textshop:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+  transition: transform 0.5s ease-in-out;
+}
+.textshop h1 {
+  color: white;
+  font-family: "UnifrakturCook", "Old English Text MT", Blackletter, serif;
+  font-size: 6rem;
+  text-shadow: 7px 2px 10px #565252;
+}
+.textshop img {
+  height: 30px;
+}
+
+footer {
+  background: black;
+  height: 500px;
+}
+
+/* Tablette verticale  */
+
+@media (max-width: 768px) {
+  #hamburger {
+    display: block;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 3.5rem;
+  }
+
+  #hamburger.active {
+    transform: rotate(90deg);
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* noir avec 50% d'opacité */
+    backdrop-filter: blur(7px); /* flou derrière le menu */
+  }
+  .navbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+
+
+      transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
+  transform: translateX(100%);
+  pointer-events: none;
+  }
+
+
+  .navbar ul.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .navbar li {
+    margin: 20px 0;
+    font-size: 1.8rem;
+    animation: glow 2s infinite alternate;
+  }
+
+  h3 {
+    visibility: hidden;
+  }
+
+  .video-container video {
+    object-position: center top; /* pour que la vidéo soit bien cadrée sur les petits écrans (tablettes etc) */
+    background: rgba(rgb(255, 255, 255), green, blue, alpha);
+  }
+
+  .textshop h1,
+  img {
+    display: none;
+    /* font-size: 4rem;
+    color: white;
+    text-shadow: 7px 2px 10px #565252;     si je veux mettre le titre , je mets ces paramètres */
+  }
+}
+
+/*----------------------------------------*/
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 2px #fff, /* lueur très fine */ 0 0 5px #fff,
+      /* un peu plus large */ 0 0 10px rgba(255, 255, 255, 0.5),
+      /* lueur diffuse */ 0 0 20px rgba(0, 0, 0, 0.7); /* légère ombre sombre pour l’effet gothique */
+  }
+  50% {
+    text-shadow: 0 0 4px #fff, 0 0 10px #fff, 0 0 15px rgba(255, 255, 255, 0.5),
+      0 0 25px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* mobiles */
+@media (max-width: 600px) {
+  .textshop h1 {
+    font-size: 2.8rem;
+    color: white;
+    text-shadow: 7px 2px 10px #565252;
+  }
+
+  .video-container video {
+    object-position: center top; /* pour que la vidéo soit bien cadrée sur les petits écrans */
+  }
+}
